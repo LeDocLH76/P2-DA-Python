@@ -20,9 +20,8 @@ def main():
             f"Categorie {category_name} Longueur de la liste = {len(books_links)}")
         category_book_info = []
         find_all_books_infos(books_links, category_book_info)
-        # print(*category_book_info, sep='\n')
-        # Enregistrer le fichier .csv
         save_category_csv(category_name, category_book_info)
+    print("Travail terminé")
 
 
 if __name__ == "__main__":

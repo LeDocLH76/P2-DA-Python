@@ -2,9 +2,12 @@ import csv
 
 
 def save_category_csv(category_name, category_book_info):
-    print("Ici est sauvegardé le fichier")
-    print(f"La categorie est : {category_name}")
-    print(f"La longueur est : {len(category_book_info)}")
+    """Write a .csv file for the category in attr
+    Add a title line on the top
+
+    """
+
+    print(f"Ecriture du fichier pour la categorie : {category_name}")
     column_title = [(
         "Product_page.url",
         "UPC",
@@ -17,7 +20,6 @@ def save_category_csv(category_name, category_book_info):
         "Image.url"
     )]
     column_title.extend(category_book_info)
-    # print(*column_title, sep="\n")
     with open("csv_files/" + category_name + ".csv", "w", newline='') as new_file:
         csv_writer = csv.writer(new_file)
         for line in column_title:
