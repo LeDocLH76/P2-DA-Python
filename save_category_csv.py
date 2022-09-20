@@ -9,14 +9,15 @@ def save_category_csv(category_name, category_book_info):
 
     print(f"Ecriture du fichier pour la categorie : {category_name}")
     column_title = [(
-        "Product_page.url",
-        "UPC",
+        "Product_page_url",
+        "Universal_product_code",
         "Title",
-        "Price incl Tax £",
-        "Number avalaible",
-        "Product description",
+        "Price_excl_tax £"
+        "Price_incl_Tax £",
+        "Number_avalaible",
+        "Product_description",
         "Category",
-        "Review rating /5",
+        "Review_rating /5",
         "Image.url"
     )]
     column_title.extend(category_book_info)

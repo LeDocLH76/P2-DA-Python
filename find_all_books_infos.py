@@ -25,6 +25,8 @@ def find_all_books_infos(books_links, category_book_info: List) -> None:
         book_upc: str = book_product_info["UPC"]
         book_title = find_book_title(soup)
         print(f"\r{books_links.index(book_link)+1}/{len(books_links)}", end='')
+        book_price_excl_tax_str: str = book_product_info["Price (excl. tax)"]
+        book_price_excl_tax = float(book_price_excl_tax_str.replace("£", ""))
         book_price_inc_tax_str: str = book_product_info["Price (incl. tax)"]
         book_price_inc_tax = float(book_price_inc_tax_str.replace("£", ""))
         book_availaible_str: str = book_product_info["Availability"]
@@ -38,6 +40,7 @@ def find_all_books_infos(books_links, category_book_info: List) -> None:
             book_page_url,
             book_upc,
             book_title,
+            book_price_excl_tax,
             book_price_inc_tax,
             book_availaible,
             book_description,
