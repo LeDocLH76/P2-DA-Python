@@ -1,10 +1,11 @@
-from save_category_csv import save_category_csv
 from constant import BASEURL
 from request_api import fetch_page
 from make_the_soup import make_the_soup
 from find_categories_links import find_categories_links
 from find_category_books_links import find_category_books_links
 from find_all_books_infos import find_all_books_infos
+from save_category_csv import save_category_csv
+from make_category_directory import make_category_directory
 
 
 def main():
@@ -16,8 +17,9 @@ def main():
         books_links = find_category_books_links(category_link)
         category_name = category_link.split("/")[-2]
         category_name = category_name.split("_")[0]
+        make_category_directory(category_name)
         print(
-            f"Categorie {category_name} Longueur de la liste = {len(books_links)}")
+            f"Categorie {categories_links.index(category_link)+1}/{len(categories_links)}")
         category_book_info = []
         find_all_books_infos(books_links, category_book_info)
         save_category_csv(category_name, category_book_info)

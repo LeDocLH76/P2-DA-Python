@@ -6,8 +6,8 @@ from find_page_books_links import find_page_books_links
 
 
 def find_category_books_links(url: str) -> List[str]:
-    """For a BeautifulSoup object of a html category first page in attr,
-    return a list of all the books link in the catategory
+    """For a category link in attr,
+    return a list of all the books links in the category
 
     """
 

@@ -13,7 +13,7 @@ from save_book_image import save_book_image
 
 def find_all_books_infos(books_links, category_book_info: List) -> None:
     """For all the books in a list of books links in attr;
-    Append info of a book to category_book_info.
+    Append info of a book to category_book_info and save image in pictures directory
     Return None
 
     """
@@ -50,5 +50,5 @@ def find_all_books_infos(books_links, category_book_info: List) -> None:
             book_image_link
         )
         category_book_info.append(book_info)
-        save_book_image(book_image_link, book_upc)
+        save_book_image(book_image_link, book_category, book_upc)
     print("")
