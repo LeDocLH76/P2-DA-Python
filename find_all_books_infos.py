@@ -8,6 +8,7 @@ from find_book_description import find_book_description
 from find_book_category import find_book_category
 from find_book_rating import find_book_rating
 from find_book_image_link import find_book_image_link
+from save_book_image import save_book_image
 
 
 def find_all_books_infos(books_links, category_book_info: List) -> None:
@@ -49,4 +50,5 @@ def find_all_books_infos(books_links, category_book_info: List) -> None:
             book_image_link
         )
         category_book_info.append(book_info)
+        save_book_image(book_image_link, book_upc)
     print("")
