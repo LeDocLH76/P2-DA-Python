@@ -12,7 +12,7 @@ def save_category_csv(category_name, category_book_info):
         "Product_page_url",
         "Universal_product_code",
         "Title",
-        "Price_excl_tax £"
+        "Price_excl_tax £",
         "Price_incl_Tax £",
         "Number_avalaible",
         "Product_description",
