@@ -6,7 +6,9 @@ def find_book_description(soup: BeautifulSoup) -> str:
     return the description of the book
 
     """
-
-    description = soup.article.find(
-        id="product_description").next_sibling.next_sibling.text
-    return description
+    try:
+        description = soup.article.find(
+            id="product_description").next_sibling.next_sibling.text
+        return description
+    except AttributeError:
+        return "Description manquante"
