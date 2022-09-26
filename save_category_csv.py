@@ -1,7 +1,7 @@
 import csv
 
 
-def save_category_csv(category_name, category_book_info):
+def save_category_csv(category_name, category_book_info) -> None:
     """Write a .csv file for the category in attr
     Add a title line on the top
 

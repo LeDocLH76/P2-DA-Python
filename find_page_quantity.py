@@ -1,13 +1,13 @@
 from find_book_quantity import find_book_quantity
 
 
-def find_page_quantity(soup) -> int:
+def find_page_quantity(page_category_soup) -> int:
     """For a BeautifulSoup object of a html category first page in attr,
     return the number of pages in the category
 
     """
 
-    category_books_quantity = find_book_quantity(soup)
+    category_books_quantity = find_book_quantity(page_category_soup)
     category_full_page_quantity = category_books_quantity // 20
     category_last_page_quantity = 0
     if category_books_quantity % 20 != 0:

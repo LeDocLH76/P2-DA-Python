@@ -2,7 +2,7 @@ from bs4 import BeautifulSoup
 
 
 def make_the_soup(page_content, parser) -> BeautifulSoup:
-    """For an API Response and a parser in attr,
+    """For an HTML page and a parser in attr,
     Return a BeautifulSoup object
 
     """

@@ -13,7 +13,3 @@ def make_category_directory(category_name: str) -> None:
     except FileExistsError:
         # print("Le repertoire existe déja")
         pass
-
-
-if __name__ == "__main__":
-    make_category_directory("test_dir")
