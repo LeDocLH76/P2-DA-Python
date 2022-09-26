@@ -35,8 +35,8 @@ def find_all_books_infos(books_links: List[str], category_book_info: List) -> No
         book_price_inc_tax = float(book_price_inc_tax_str.replace("£", ""))
         book_price_excl_tax_str: str = book_product_info["Price (excl. tax)"]
         book_price_excl_tax = float(book_price_excl_tax_str.replace("£", ""))
-        # book_available_str like:
         book_available_str: str = book_product_info["Availability"]
+        # book_available_str like: In stock (19 available)
         match = re.search("[0-9]+", book_available_str)
         book_available = int(match.group())
         book_description = find_book_description(page_book_soup)

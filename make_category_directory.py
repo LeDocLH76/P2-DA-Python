@@ -6,6 +6,7 @@ def make_category_directory(category_name: str) -> None:
 
     """
 
+    # category_name like: Historical Fiction
     category_name = category_name.replace(" ", "_")
     try:
         os.mkdir("pictures/" + category_name)

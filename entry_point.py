@@ -18,9 +18,9 @@ def main():
     for category_link in categories_links:
         category_link: str = category_link
         books_links = find_category_books_links(category_link)
-        # category_link like:
+        # category_link like: catalogue/category/books/travel_2/index.html
         category_name = category_link.split("/")[-2]
-        # category_name like:
+        # category_name like: travel_2
         category_name = category_name.split("_")[0]
         print(
             f"Catégorie {categories_links.index(category_link)+1}/{len(categories_links)}")
