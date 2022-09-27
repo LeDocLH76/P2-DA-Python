@@ -1,3 +1,4 @@
+"""Module for extracting books's data on web site"""
 from constant import BASEURL
 from request_api import fetch_page
 from make_the_soup import make_the_soup
