@@ -1,11 +1,12 @@
 from typing import List
 from bs4 import BeautifulSoup
+
 from constant import BASEURL
 
 
 def find_categories_links(page_book_soup: BeautifulSoup) -> List[str]:
     """For a BeautifulSoup object of the html main page in attr,
-    return a list of links for the categories 
+    return a list of links for the categories
 
     """
 

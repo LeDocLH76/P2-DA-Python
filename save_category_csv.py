@@ -21,7 +21,8 @@ def save_category_csv(category_name, category_book_info) -> None:
         "image_url"
     )]
     column_title.extend(category_book_info)
-    with open("csv_files/" + category_name + ".csv", "w", encoding="utf-8", newline='') as new_file:
+    with open("csv_files/" + category_name + ".csv",
+              "w", encoding="utf-8", newline='') as new_file:
         csv_writer = csv.writer(new_file)
         for line in column_title:
             csv_writer.writerow(line)

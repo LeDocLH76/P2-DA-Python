@@ -23,7 +23,8 @@ def main():
         # category_name like: travel_2
         category_name = category_name.split("_")[0]
         print(
-            f"Catégorie {categories_links.index(category_link)+1}/{len(categories_links)}")
+            f"Catégorie {categories_links.index(category_link)+1}/\
+                {len(categories_links)}")
         category_book_info = []
         find_all_books_infos(books_links, category_book_info)
         save_category_csv(category_name, category_book_info)

@@ -1,4 +1,5 @@
 from typing import List
+
 from request_api import fetch_page
 from make_the_soup import make_the_soup
 from find_page_quantity import find_page_quantity
@@ -12,7 +13,8 @@ def find_category_books_links(url: str) -> List[str]:
     """
 
     page_category_html = fetch_page(url)
-    page_category_soup = make_the_soup(page_category_html.content, 'html.parser')
+    page_category_soup = make_the_soup(
+        page_category_html.content, 'html.parser')
     category_total_page_quantity = find_page_quantity(page_category_soup)
     # Find the books links for the first page
     books_links = find_page_books_links(page_category_soup)
@@ -26,7 +28,8 @@ def find_category_books_links(url: str) -> List[str]:
         split_url[-1] = next_page
         next_url = "/".join(split_url)
         page_category_html = fetch_page(next_url)
-        next_page_category_soup = make_the_soup(page_category_html.content, 'html.parser')
+        next_page_category_soup = make_the_soup(
+            page_category_html.content, 'html.parser')
         books_links_to_add = find_page_books_links(next_page_category_soup)
         books_links.extend(books_links_to_add)
     return books_links
