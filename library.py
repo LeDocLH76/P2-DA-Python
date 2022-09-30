@@ -1,8 +1,8 @@
 from typing import List
 
 from bs4 import ResultSet
-from constant import BASEURL
 
+from constant import BASEURL
 from request_api import fetch_page
 from make_the_soup import make_the_soup
 

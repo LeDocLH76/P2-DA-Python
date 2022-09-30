@@ -17,5 +17,4 @@ for index in range(len(categories_names)):
         library.categories_links[index])
     print(categories_names[index].name + " " +
           categories_names[index].category_url)
-
     # print(categories_names[index].books_url)

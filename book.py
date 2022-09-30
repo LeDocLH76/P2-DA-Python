@@ -1,4 +1,5 @@
 import re
+
 from constant import BASEURL, RATINGVALUES
 from make_the_soup import make_the_soup
 from request_api import fetch_page
@@ -10,14 +11,14 @@ class Book:
         self.book_soup = Book.find_book_soup(self)
         self.book_product_info = Book.find_book_product_info
         self.book_upc = self.book_product_info["UPC"]
-        # --self.book_title = book_title
-        # --self.book_price_inc_tax = book_price_inc_tax
-        # --self.book_price_excl_tax = book_price_excl_tax
-        # self.book_available = book_available
-        # --self.book_description = book_description
-        # --self.book_category = book_category
-        # --self.book_rating = book_rating
-        # --self.book_image_link = book_image_link
+        # --self.book_title
+        # --self.book_price_inc_tax
+        # --self.book_price_excl_tax
+        # --self.book_available
+        # --self.book_description
+        # --self.book_category
+        # --self.book_rating
+        # --self.book_image_link
 
     def find_book_soup(self):
         page_book = fetch_page(self.book_page_url)
