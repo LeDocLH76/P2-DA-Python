@@ -47,10 +47,6 @@ class Category:
 
     @staticmethod
     def find_page_quantity(category_soup: BeautifulSoup) -> int:
-        """For a BeautifulSoup object of a html category first page in attr,
-        return the number of pages in the category
-        """
-
         category_books_quantity = Category.find_book_quantity(category_soup)
         category_full_page_quantity = category_books_quantity // 20
         category_last_page_quantity = int(0)
@@ -62,19 +58,11 @@ class Category:
 
     @staticmethod
     def find_book_quantity(category_soup: BeautifulSoup) -> int:
-        """For a BeautifulSoup object of a category html page in attr,
-        return the number of the books in category
-        """
-
         book_quantity = int(category_soup.form.find("strong").text)
         return book_quantity
 
     @staticmethod
     def find_page_books_links(category_soup: BeautifulSoup) -> List[str]:
-        """For a BeautifulSoup object of a html category page in attr,
-        return list of books links
-        """
-
         li_list = category_soup.section.find_all('article')
         books_links = [li.select_one('a')['href'] for li in li_list]
         books_links = [link.replace(
