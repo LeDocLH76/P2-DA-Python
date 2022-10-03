@@ -98,5 +98,7 @@ for category_obj in categories_obj:
         if book_obj.get_book_info[7] == category_name:
             books_info_in_category.append(book_obj.get_book_info)
             save_book_image(
-                book_obj.get_book_info[0], book_obj.get_book_info[7], book_obj.get_book_info[1])
+                book_obj.get_book_info[0],
+                book_obj.get_book_info[7],
+                book_obj.get_book_info[1])
     save_category_csv(category_name, books_info_in_category)
