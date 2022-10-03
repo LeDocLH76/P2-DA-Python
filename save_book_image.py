@@ -8,5 +8,6 @@ def save_book_image(url: str, category_name: str, upc: str) -> None:
     page = requests.get(url)
    #  print(f"Status = {page.status_code}")
     file_extention = os.path.splitext(url)[-1]
-    with open("pictures/" + category_name + "/" + upc + file_extention, "wb") as f:
+    with open("pictures/" + category_name + "/"
+              + upc + file_extention, "wb") as f:
         f.write(page.content)

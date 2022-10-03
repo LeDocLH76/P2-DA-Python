@@ -2,10 +2,14 @@ from typing import List
 from bs4 import BeautifulSoup
 
 from constant import BASEURL
+from library import Library
 
 
-class Category:
-    def __init__(self, page_category_soup: BeautifulSoup) -> None:
+class Category(Library):
+    def __init__(
+            self, page_category_soup: BeautifulSoup, category_name) -> None:
+        # Like "historical_fiction"
+        self.name = category_name
         self.set_books_links(page_category_soup)
 
     def set_books_links(self, page_category_soup: BeautifulSoup) -> None:
@@ -30,9 +34,9 @@ class Category:
         try:
             self.next_page = page_category_soup.find(
                 "li", class_="next").a["href"]
-            print(f"Autre page à {self.next_page}")
+            # print(f"Autre page à {self.next_page}")
         except AttributeError:
-            print("Pas d'autre page")
+            # print("Pas d'autre page")
             self.next_page = None
 
     @property

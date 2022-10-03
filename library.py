@@ -9,7 +9,6 @@ class Library:
     def __init__(self, page_main_soup: ResultSet) -> None:
         self.set_categories_links(page_main_soup)
         self.set_categories_names(page_main_soup)
-        # print(f"Library init, site url = {self.site_url}")
 
     def set_categories_links(self, page_main_soup) -> None:
         li_list = page_main_soup.aside.ul.ul.find_all("li")
@@ -28,4 +27,9 @@ class Library:
 
     @property
     def get_categories_names(self) -> List[str]:
+        # Like "historical_fiction"
         return self._categories_names
+
+    @property
+    def get_library(self):
+        return self

@@ -1,7 +1,8 @@
 import csv
+from typing import List
 
 
-def save_category_csv(category_name, category_book_info) -> None:
+def save_category_csv(category_name: str, category_book_info: List[tuple]) -> None:
     """Write a .csv file for the category in attr
     Add a title line on the top
 
