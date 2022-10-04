@@ -1,4 +1,5 @@
 """Module for extracting books's data on web site"""
+import time
 from constant import BASEURL
 from request_api import fetch_page
 from make_the_soup import make_the_soup
@@ -13,6 +14,7 @@ def main():
     and save them by categories in csv files.
     Get books's images and save them in a directory for each category of book.
     """
+    start = time.time()
     page_base = fetch_page(BASEURL+"index.html")
     soup = make_the_soup(page_base.content, 'html.parser')
     categories_links = find_categories_links(soup)
@@ -25,11 +27,17 @@ def main():
         category_name = category_name.split("_")[0]
         print(
             f"Catégorie {categories_links.index(category_link)+1}/\
-                {len(categories_links)}")
+{len(categories_links)}")
         category_book_info = []
         find_all_books_infos(books_links, category_book_info)
         save_category_csv(category_name, category_book_info)
     print("Travail terminé")
+
+    end = time.time()
+    duree = round(end - start)
+    minute = duree // 60
+    seconde = duree % 60
+    print(f"Temps d'execution = {minute}  minutes {seconde} secondes")
 
 
 if __name__ == "__main__":
