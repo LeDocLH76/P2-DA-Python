@@ -29,8 +29,8 @@ categories_obj: List[Category] = []
 for url_to_fetch, category_name in zip(
         library.get_categories_links, library.get_categories_names):
 
-    if category_name == "historical_fiction":
-        break
+    # if category_name == "historical_fiction":
+    #     break
 
     # category_name like "historical_fiction"
     page_category = fetch_page(url_to_fetch)
@@ -39,6 +39,15 @@ for url_to_fetch, category_name in zip(
     categories_obj.append(Category(page_category_soup, category_name))
     category_obj_index = categories_obj[library.get_categories_links.index(
         url_to_fetch)]
+
+    livre_s = "livre" if len(
+        category_obj_index.get_books_links) < 2 else "livres"
+
+    print(
+        f"Récupération de la catégorie \
+{library.get_categories_links.index(url_to_fetch)+1}/\
+{len(library.get_categories_links)} {category_name}, \
+et des liens pour {len(category_obj_index.get_books_links)} {livre_s}")
 
     while category_obj_index.next_page is not None:
         # unbuild the category first page url and remove the end
@@ -54,13 +63,6 @@ for url_to_fetch, category_name in zip(
 
         category_obj_index.add_books_links(page_category_soup)
 
-    livre_s = "livre" if len(
-        category_obj_index.get_books_links) < 2 else "livres"
-    print(
-        f"Récupération de la catégorie \
-{library.get_categories_links.index(url_to_fetch)+1}/\
-{len(library.get_categories_links)} {category_name}, \
-et des liens pour {len(category_obj_index.get_books_links)} {livre_s}")
 
 # *********************
 # Search for books infos
@@ -70,24 +72,24 @@ for category_link, category_name in zip(
         library.get_categories_links, library.get_categories_names):
     # category_name like "historical_fiction"
 
-    if category_name == "historical_fiction":
-        break
+    # if category_name == "historical_fiction":
+    #     break
 
     books_links = categories_obj[library.get_categories_links.index(
         category_link)].get_books_links
-    for url_to_fetch in books_links:
-        page_book = fetch_page(url_to_fetch)
-        page_book_soup = make_the_soup(page_book.content, "html.parser")
-        books_obj.append(Book(page_book_soup, url_to_fetch, category_name))
 
     livre_s = "livre" if len(
         books_links) < 2 else "livres"
+
     print(f"Récupération des infos de \
 {len(books_links)} {livre_s} dans la catégorie \
 {library.get_categories_links.index(category_link)+1}/\
 {len(library.get_categories_links)}")
 
-
+    for url_to_fetch in books_links:
+        page_book = fetch_page(url_to_fetch)
+        page_book_soup = make_the_soup(page_book.content, "html.parser")
+        books_obj.append(Book(page_book_soup, url_to_fetch, category_name))
 print(f"Nombre de livre = {len(books_obj)}")
 
 # *********************
@@ -109,5 +111,7 @@ for category_obj in categories_obj:
     save_category_csv(category_name, books_info_in_category)
 
 end = time.time()
-duree = (end - start)/1000
-print(f"Temps d'execution = {duree:.2} secondes")
+duree = round(end - start)
+minute = duree // 60
+seconde = duree % 60
+print(f"Temps d'execution = {minute}  minutes {seconde} secondes")
