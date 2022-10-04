@@ -1,25 +1,29 @@
 import re
-from typing import List
+from typing import List, Tuple
+
+from bs4 import BeautifulSoup
 
 from constant import BASEURL, RATINGVALUES
 
 
 class Book:
-    def __init__(self, page_book_soup, page_book_url, category_name) -> None:
+    def __init__(self, page_book_soup: BeautifulSoup,
+                 page_book_url: str,
+                 category_name: str) -> None:
         self._page_url = page_book_url
-        # Like "historical_fiction"
+        # category_name like "historical_fiction"
         self._category = category_name
         self._product_info = self.product_info(page_book_soup)
         self.set_title(page_book_soup)
         self.set_price_inc_tax()
         self.set_price_excl_tax()
-        self._upc = self._product_info["UPC"]
+        self._upc: str = self._product_info["UPC"]
         self.set_available()
-        self.set_description = self.set_description(page_book_soup)
-        self.set_rating = self.set_rating(page_book_soup)
-        self.set_image_link = self.set_image_link(page_book_soup)
+        self.set_description(page_book_soup)
+        self.set_rating(page_book_soup)
+        self.set_image_link(page_book_soup)
 
-    def set_title(self, page_book_soup) -> str:
+    def set_title(self, page_book_soup: BeautifulSoup) -> str:
         title = page_book_soup.article.select_one("h1").text
         self._title = title
 
@@ -42,7 +46,7 @@ class Book:
         available = int(match.group())
         self._available = available
 
-    def set_description(self, page_book_soup) -> None:
+    def set_description(self, page_book_soup: BeautifulSoup) -> None:
         try:
             description = page_book_soup.article.find(
                 id="product_description").next_sibling.next_sibling.text
@@ -57,18 +61,19 @@ class Book:
     #     category = category.replace("\n", "")
     #     self._category = category
 
-    def set_rating(self, page_book_soup) -> None:
-        rating = page_book_soup.select_one(".star-rating")['class']
-        rating = RATINGVALUES[rating[1]]
+    def set_rating(self, page_book_soup: BeautifulSoup) -> None:
+        rating_str: str = page_book_soup.select_one(".star-rating")['class']
+        rating: int = RATINGVALUES[rating_str[1]]
         self._rating = rating
 
-    def set_image_link(self, page_book_soup) -> None:
-        link = page_book_soup.select_one(".carousel-inner img")['src']
+    def set_image_link(self, page_book_soup: BeautifulSoup) -> None:
+        link: str = page_book_soup.select_one(".carousel-inner img")['src']
         link = link.replace("../..", BASEURL)
         self._image_link = link
 
     @property
-    def get_book_info(self) -> List[str | int | float]:
+    def get_book_info(self) -> Tuple[
+            str, str, str, float, float, int, str, str, int, str]:
         info = (
             self._page_url,
             self._upc,
@@ -83,7 +88,7 @@ class Book:
         return info
 
     @staticmethod
-    def product_info(page_book_soup) -> dict:
+    def product_info(page_book_soup: BeautifulSoup) -> dict[str, str]:
         # With in key:
         # - UPC
         # - Product Type
@@ -93,9 +98,9 @@ class Book:
         # - Availability
         # - Number of reviews
 
-        table_key = page_book_soup.table.find_all("th")
+        table_key: List[str] = page_book_soup.table.find_all("th")
         table_key = [key.text for key in table_key]
-        table_value = page_book_soup.table.find_all("td")
+        table_value: List[str] = page_book_soup.table.find_all("td")
         table_value = [value.text for value in table_value]
         product_info = dict(zip(table_key, table_value))
         return product_info

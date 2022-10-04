@@ -1,20 +1,20 @@
 from typing import List
+
 from bs4 import BeautifulSoup
 
 from constant import BASEURL
-from library import Library
 
 
-class Category(Library):
+class Category():
     def __init__(
             self, page_category_soup: BeautifulSoup, category_name) -> None:
-        # Like "historical_fiction"
+        # category_name like "historical_fiction"
         self.name = category_name
         self.set_books_links(page_category_soup)
 
     def set_books_links(self, page_category_soup: BeautifulSoup) -> None:
         li_list = page_category_soup.section.find_all('article')
-        books_links = [li.select_one('a')['href'] for li in li_list]
+        books_links: List[str] = [li.select_one('a')['href'] for li in li_list]
         books_links = [link.replace(
             "../../..", BASEURL + "catalogue") for link in books_links]
         self._books_links = books_links
@@ -22,12 +22,11 @@ class Category(Library):
 
     def add_books_links(self, page_category_soup: BeautifulSoup) -> None:
         li_list = page_category_soup.section.find_all('article')
-        books_links = [li.select_one('a')['href'] for li in li_list]
-        books_links = [link.replace(
-            "../../..", BASEURL + "catalogue") for link in books_links]
-        # print(f"Book links to add = {books_links}")
-        self._books_links.extend(books_links)
-        # print(f"Book links after add = {self._books_links}")
+        books_links_to_add: List[str] = [
+            li.select_one('a')['href'] for li in li_list]
+        books_links_to_add = [link.replace(
+            "../../..", BASEURL + "catalogue") for link in books_links_to_add]
+        self._books_links.extend(books_links_to_add)
         self.set_next_page(page_category_soup)
 
     def set_next_page(self, page_category_soup: BeautifulSoup) -> str | None:

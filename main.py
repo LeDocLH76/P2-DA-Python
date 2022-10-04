@@ -1,14 +1,18 @@
+import time
 from typing import List
 from book import Book
 
 from constant import BASEURL
-from make_category_directory import make_category_directory
-from request_api import fetch_page
-from make_the_soup import make_the_soup
 from library import Library
 from category import Category
+from request_api import fetch_page
+from make_the_soup import make_the_soup
+from make_category_directory import make_category_directory
 from save_book_image import save_book_image
 from save_category_csv import save_category_csv
+
+
+start = time.time()
 
 # *********************
 # Search for categories
@@ -88,10 +92,11 @@ print(f"Nombre de livre = {len(books_obj)}")
 
 # *********************
 # Save categories.csv
+# Save images
 # *********************
 for category_obj in categories_obj:
     category_name = category_obj.name
-    # Like "historical_fiction"
+    # category_name like "historical_fiction"
     make_category_directory(category_name)
     books_info_in_category = []
     for book_obj in books_obj:
@@ -102,3 +107,7 @@ for category_obj in categories_obj:
                 book_obj.get_book_info[7],
                 book_obj.get_book_info[1])
     save_category_csv(category_name, books_info_in_category)
+
+end = time.time()
+duree = (end - start)/1000
+print(f"Temps d'execution = {duree:.2} secondes")
