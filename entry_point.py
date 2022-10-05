@@ -1,13 +1,14 @@
 """Module for extracting books's data on web site"""
 import time
 from typing import List
+import requests
+from bs4 import BeautifulSoup
+
 
 from constant import BASEURL
-from request_api import fetch_page
-from make_the_soup import make_the_soup
-from find_category_books_links import find_category_books_links
-from find_all_books_infos import find_all_books_infos
-from save_category_csv import save_category_csv
+from finders.find_category_books_links import find_category_books_links
+from finders.find_all_books_infos import find_all_books_infos
+from utils import save_category_csv
 
 
 def main():
@@ -16,8 +17,8 @@ def main():
     Get books's images and save them in a directory for each category of book.
     """
     start = time.time()
-    main_page = fetch_page(BASEURL+"index.html")
-    main_page_soup = make_the_soup(main_page.content, 'html.parser')
+    main_page = requests.get(BASEURL+"index.html")
+    main_page_soup = BeautifulSoup(main_page.content, 'html.parser')
     # Find categories links in the main page
     li_list = main_page_soup.aside.ul.ul.find_all("li")
     categories_links: List[str] = [

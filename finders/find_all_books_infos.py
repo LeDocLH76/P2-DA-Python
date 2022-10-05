@@ -1,16 +1,15 @@
 import re
 from typing import List
+import requests
+from bs4 import BeautifulSoup
 
-from make_category_directory import make_category_directory
-from request_api import fetch_page
-from make_the_soup import make_the_soup
-from find_book_product_info import find_book_product_info
-from find_book_title import find_book_title
-from find_book_description import find_book_description
-from find_book_category import find_book_category
-from find_book_rating import find_book_rating
-from find_book_image_link import find_book_image_link
-from save_book_image import save_book_image
+from utils import make_category_directory, save_book_image
+from finders.find_book_product_info import find_book_product_info
+from finders.find_book_title import find_book_title
+from finders.find_book_description import find_book_description
+from finders.find_book_category import find_book_category
+from finders.find_book_rating import find_book_rating
+from finders.find_book_image_link import find_book_image_link
 
 
 def find_all_books_infos(
@@ -22,8 +21,8 @@ def find_all_books_infos(
     """
 
     for book_link in books_links:
-        page_book = fetch_page(book_link)
-        page_book_soup = make_the_soup(page_book.content, 'html.parser')
+        page_book = requests.get(book_link)
+        page_book_soup = BeautifulSoup(page_book.content, 'html.parser')
         book_page_url = book_link
         book_product_info = find_book_product_info(page_book_soup)
         book_upc = book_product_info["UPC"]
