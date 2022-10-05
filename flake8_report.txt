@@ -1,0 +1,6 @@
+flake8.checker            MainProcess   2579 WARNING  The multiprocessing module is not available. Ignoring --jobs arguments.
+flake8.checker            MainProcess   2579 INFO     Making checkers
+flake8.checker            MainProcess   3370 INFO     Checking 13 files
+flake8.main.application   MainProcess   3851 INFO     Finished running
+flake8.main.application   MainProcess   3866 INFO     Reporting errors
+flake8.main.application   MainProcess   3866 INFO     Found a total of 0 violations and reported 0

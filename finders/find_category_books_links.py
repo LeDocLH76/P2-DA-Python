@@ -20,7 +20,7 @@ def find_category_books_links(category_url: str) -> List[str]:
     # Find the books links for the first page
     books_links = find_page_books_links(page_category_soup)
     # Find the books links for the other pages
-    for page in range(category_total_page_quantity-1):
+    for page in range(category_total_page_quantity - 1):
         page_offset = str(page + 2)
         # construct the end part of the next page url
         next_page = "page-" + page_offset + ".html"

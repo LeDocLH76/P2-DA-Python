@@ -17,7 +17,7 @@ def main():
     Get books's images and save them in a directory for each category of book.
     """
     start = time.time()
-    main_page = requests.get(BASEURL+"index.html")
+    main_page = requests.get(BASEURL + "index.html")
     main_page_soup = BeautifulSoup(main_page.content, 'html.parser')
     # Find categories links in the main page
     li_list = main_page_soup.aside.ul.ul.find_all("li")
