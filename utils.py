@@ -34,7 +34,7 @@ def save_category_csv(category_name, category_book_info) -> None:
     Add a title line on the top
     """
     print(f"Ecriture du fichier pour la categorie : {category_name}")
-    column_title = [(
+    column_title = [
         "product_page_url",
         "universal_product_code",
         "title",
@@ -45,7 +45,7 @@ def save_category_csv(category_name, category_book_info) -> None:
         "category",
         "review_rating",
         "image_url"
-    )]
+    ]
     with open("csv_files/" + category_name + ".csv",
               "w", encoding="utf-8", newline='') as new_file:
         csv_writer = csv.writer(new_file)
